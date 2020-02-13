@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:id="@+id/rotiv"
+        android:layout_width="237dp"
+        android:layout_height="216dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/fan" />
+
+    <Button
+        android:id="@+id/rotbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/btnstyle"
+        android:text="Start"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:stateListAnimator="@null"
+        android:elevation="80dp"
+        app:layout_constraintEnd_toStartOf="@+id/buttonstop"
+        app:layout_constraintHorizontal_bias="0.617"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rotiv" />
+
+    <Button
+        android:id="@+id/buttonstop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="76dp"
+        android:layout_marginRight="76dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/btnstyle"
+        android:text="Stop"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="80dp"
+        android:stateListAnimator="@null"
+        app:layout_constraintTop_toBottomOf="@+id/rotiv" />
+
+    <com.akaita.android.circularseekbar.CircularSeekBar
+        android:id="@+id/skc"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="36dp"
+        app:enabled="true"
+        app:innerCircleColor="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonstop"
+        app:max="100"
+        app:min="0"
+        app:progress="0"
+        app:progressTextColor="#000000"
+        app:progressTextSize="15"
+        app:ringColor="@color/colorAccent"
+        app:ringWidth="0.5"
+        app:showIndicator="true"
+        app:showInnerCircle="true"
+        app:showProgressText="true"
+        android:pointerIcon="hand"></com.akaita.android.circularseekbar.CircularSeekBar>
+
+
+    <Button
+        android:id="@+id/subscribe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/skc" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
