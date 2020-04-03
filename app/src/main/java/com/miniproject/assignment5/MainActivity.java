@@ -1,19 +1,14 @@
-package com.shivam.assignment5;
+package com.miniproject.assignment5;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.akaita.android.circularseekbar.CircularSeekBar;
@@ -39,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Mqtt mqtt = new Mqtt(getApplicationContext());
         final MqttAndroidClient client = mqtt.get_connection();
 
@@ -48,14 +44,31 @@ public class MainActivity extends AppCompatActivity {
         circularSeekBar=(CircularSeekBar)findViewById(R.id.skc);
         circularSeekBar.setProgressTextFormat(new DecimalFormat("###,###,##0"));
         subscribe = (Button)findViewById(R.id.subscribe);
-        subscribe.setVisibility(View.GONE);
+
+        //uncomment below for recevier and comment for sender
+        //subscribe.setVisibility(View.GONE);
 
 
-       subscribe.setOnClickListener(new View.OnClickListener() {
+
+        subscribe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    client.subscribe("fan", 1);
+
+                    //uncomment below  block for recevier and comment for sender
+                    /*try{
+                        String msg ="One device Connnected";
+                        client.publish("device",new MqttMessage(msg.getBytes()));
+                    }catch (MqttException e){
+
+                    }
+                    client.subscribe("fan", 1);*/
+
+                    //comment below  for recevier and uncomment for sender
+                    client.subscribe("device",1);
+
+
+
                 }catch (MqttException e){}
                 client.setCallback(new MqttCallback() {
                     @Override
@@ -65,9 +78,13 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void messageArrived(String topic, MqttMessage message) throws Exception {
-                            //Toast.makeText(getApplicationContext(),message.toString(),Toast.LENGTH_SHORT).show();
-                            String progress = message.toString();
-                            circularSeekBar.setProgress(Float.parseFloat(progress));
+
+                        //uncomment below  for recevier and comment for sender
+                            /*String progress = message.toString();
+                            circularSeekBar.setProgress(Float.parseFloat(progress));*/
+
+                           //comment below  for recevier and uncomment for sender
+                            Toast.makeText(getApplicationContext(),"One device Connected",Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -91,7 +108,8 @@ public class MainActivity extends AppCompatActivity {
                 aniRotateClk.setDuration(3000);
                 iv.startAnimation(aniRotateClk);
                 circularSeekBar.setProgress(10);
-                subscribe.performClick();
+                //comment below  for recevier and uncomment for sender
+               // subscribe.performClick();
 
             }
         });
@@ -129,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
                         }
 
 
-                        // Toast.makeText(getApplicationContext(),"Current speed:"+value,Toast.LENGTH_SHORT).show();
+
                         if(value!=0)
                             stop.performClick();
 
@@ -155,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
                     aniRotateClk = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate);
                     aniRotateClk.setDuration((long) (10000/progress));
                     iv.startAnimation(aniRotateClk);
+                //comment below try-catch for recevier and uncomment for sender
                    try{
                         String msg =""+progress;
                         client.publish("fan",new MqttMessage(msg.getBytes()));
@@ -174,6 +193,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
+
 
     }
 }

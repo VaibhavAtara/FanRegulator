@@ -1,4 +1,4 @@
-package com.shivam.assignment5;
+package com.miniproject.assignment5;
 
 import org.junit.Test;
 
